@@ -4,20 +4,21 @@
       - [Pré-Requisitos:](#pré-requisitos)
       - [Introdução](#introdução)
   - [1. Download do terraform:](#1-download-do-terraform)
-  - [2. Preparando o GCP para o Terraform](#2-preparando-o-gcp-para-o-terraform)
-  - [3. Configuração do Terraform](#3-configuração-do-terraform)
-    - [3.1 Configuração dos arquivos .tf](#31-configuração-dos-arquivos-tf)
-      - [3.1.1. main.tf](#311-maintf)
-      - [3.1.2. network.tf](#312-networktf)
-      - [3.1.3. firewall.tf](#313-firewalltf)
-      - [3.1.4. hosts.tf](#314-hoststf)
-      - [3.1.4. variables.tf](#314-variablestf)
+  - [1.2. Preparando o GCP para o Terraform](#12-preparando-o-gcp-para-o-terraform)
+  - [1.3. Configuração do Terraform](#13-configuração-do-terraform)
+    - [1.3.1 Configuração dos arquivos .tf](#131-configuração-dos-arquivos-tf)
+      - [1.3.2. main.tf](#132-maintf)
+      - [1.3.3. network.tf](#133-networktf)
+      - [1.3.4. firewall.tf](#134-firewalltf)
+      - [1.3.5. hosts.tf](#135-hoststf)
+      - [1.3.6. variables.tf](#136-variablestf)
   - [2. Kubespray](#2-kubespray)
       - [2.1 Host ansible](#21-host-ansible)
       - [2.1.2 Instalação do git e pré-requisitos Kubespray](#212-instalação-do-git-e-pré-requisitos-kubespray)
       - [2.1.3 Gerando chaves ssh (ansible)](#213-gerando-chaves-ssh-ansible)
-      - [2.1 Instalação do cluster kubernetes (kubespray)](#21-instalação-do-cluster-kubernetes-kubespray)
+      - [2.2 Instalação do cluster kubernetes (kubespray)](#22-instalação-do-cluster-kubernetes-kubespray)
   - [3. Nginx Ingress](#3-nginx-ingress)
+      - [3.1 Certificado auto-assinado](#31-certificado-auto-assinado)
   - [4. Storage](#4-storage)
   - [5. JenkinsX](#5-jenkinsx)
   - [6. Git](#6-git)
@@ -74,7 +75,7 @@ para validar o binário, você pode executar:
 
     terraform --version
 
-## 2. Preparando o GCP para o Terraform
+## 1.2. Preparando o GCP para o Terraform
 
 > :warning: **Projeto Criado**: Antes é importante lembrar que você precisa ter um projeto criado no GCP. 
 
@@ -90,11 +91,11 @@ Foi criada a chave do tipo JSON e atribuído o papel de Editor para a conta de s
 
 **Ao clicar em criar, será gerado um arquivo .json. Salve a chave em seu computador e lembre-se o caminho salvo, pois utilizaremos esta chave em breve.**
 
-## 3. Configuração do Terraform
+## 1.3. Configuração do Terraform
 
 À partir deste ítem criaremos os arquivos de configuração do terraform (uma espécie de receita de bolo) para o provisionamento da estrutura a ser utilizada no Google Cloud.
 
-### 3.1 Configuração dos arquivos .tf 
+### 1.3.1 Configuração dos arquivos .tf 
 
 Realizado os passos anteriores de projeto e conta de serviço no google, prosseguiremos para criação da nossa "receita de bolo". (arquivo de configuração terraform). Os arquivos de configuração do terraform são interpretados pelas extensão `.tf` ou `.tf.json.`
 
@@ -108,7 +109,7 @@ Conforme introdução, criaremos uma estrutura inicial com três servidores, ent
 
 **=) **Vamos la:** :+1:
 
-#### 3.1.1. main.tf
+#### 1.3.2. main.tf
 
 O arquivo main.tf será o arquivo utilizado para referenciar o projeto criado anteriormente e a conta a ser utilizado pelo terraform:
 
@@ -122,7 +123,7 @@ Nota: Lembre-se de substituir o valor da variável <file> pelo nome do arquivo d
 
 Particularmente eu gosto de trabalhar com os arquivos que fazem cargas de trabalhos diferentes separados, portanto no main, irei deixar apenas as informações e configuração de acesso ao projeto dentro do GCP que vamos trabalhar.
 
-#### 3.1.2. network.tf
+#### 1.3.3. network.tf
 
     # touch network.tf
 
@@ -160,7 +161,7 @@ Particularmente eu gosto de trabalhar com os arquivos que fazem cargas de trabal
 
 Referencia: [Network](https://www.terraform.io/docs/providers/google/d/compute_network.html)
 
-#### 3.1.3. firewall.tf
+#### 1.3.4. firewall.tf
 
 Um detalhe importante a ser considerado são as permissões entre os hosts na comunicação das apis do Kubernetes com relação às portas de serviço utilizadas: 
 - [Required Ports](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports)
@@ -213,7 +214,7 @@ Portanto, já que estamos configurando uma rede nova para ser provisionada na im
 
 - [Firewall](link)
 
-#### 3.1.4. hosts.tf
+#### 1.3.5. hosts.tf
 
 **Conteúdo do Arquivo:**
 
@@ -251,7 +252,7 @@ Portanto, já que estamos configurando uma rede nova para ser provisionada na im
 - [Remote Exec Script](https://www.terraform.io/docs/provisioners/remote-exec.html)
 - https://www.terraform.io/docs/provisioners/connection.html
 
-#### 3.1.4. variables.tf
+#### 1.3.6. variables.tf
 
     #-----------------------#
     #Propriedades do Host   #
@@ -328,8 +329,6 @@ Portanto, já que estamos configurando uma rede nova para ser provisionada na im
     variable "name_rule_ssh"{
     default = "permit-ssh"
     }
-
-
 
 **Fonte:** 
   - https://www.terraform.io/docs/providers/google/index.html
@@ -408,7 +407,7 @@ Em cada nó execute:
     # systemctl stop firewalld && systemctl disable firewalld
     # sed -i s/^SELINUX=.*$/SELINUX=disabled/ /etc/selinux/config
 
-#### 2.1 Instalação do cluster kubernetes (kubespray)
+#### 2.2 Instalação do cluster kubernetes (kubespray)
 
 Acesse o diretório do **kubespray**:
 
@@ -439,7 +438,7 @@ Definindo fuções para o cluster e para conta de serviço:
 
     $ kubectl apply -f rbac/rbac.yaml
 
-Crie uma secret com um certificado TLS e uma chave padrão para o servidor no NGINX: (Caso tenha um certificado válido, aplique-o aqui)
+Crie uma secret com um certificado TLS e uma chave padrão para o servidor no NGINX: (Caso tenha um certificado válido, aplique-o aqui, do contrário execute os passos no ítem 3.1 [](#31-certificado-auto-assinado))
 
     $ kubectl apply -f common/default-server-secret.yaml
 
@@ -523,7 +522,7 @@ spec:
   - host: cafe.lab.syseder.online
     http:
       paths:
-      - path: /cafe
+      - path: /
         backend:
           serviceName: coffee-svc
           servicePort: 80
@@ -531,7 +530,7 @@ spec:
   - host: tea.lab.syseder.online
     http:
       paths:
-      - path: /cafe
+      - path: /
         backend:
           serviceName: tea-svc
           servicePort: 80
@@ -544,11 +543,25 @@ spec:
           serviceName: tea-svc
           servicePort: 80
 
-Acessando externamente:
+> Observe que a regra: cafe.lab.syseder.online utiliza a flag "tls" que encaminhará a navegação para o acesso sobre tls/ssl na porta 443. Será preciso configurar a secret para interpretação do certificado para este domínio.
 
-www.syseder.online
+#### 3.1 Certificado auto-assinado
 
-![](kubespray06.png)
+    $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/ederqueiroz/syseder-selfsigned.key -out /home/ederqueiroz/syseder-selfsigned.crt
+
+Os arquivos .crt e .key foram encriptados em base64:
+
+    $ cat syseder-selfsigned.key |base64
+    $ cat syseder-selfsigned.crt |base64
+
+e posteriormente configurados no arquivo cafe-secret.yaml
+
+![](img/kubespray07.png)
+
+> Acessando externamente:
+> www.syseder.online
+
+![](img/kubespray06.png)
 
 
 **Referências:**
