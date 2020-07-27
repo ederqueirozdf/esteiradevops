@@ -544,6 +544,11 @@ spec:
           serviceName: tea-svc
           servicePort: 80
 
+Acessando externamente:
+
+www.syseder.online
+
+![](kubespray06.png)
 
 
 **Referências:**
