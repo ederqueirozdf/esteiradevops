@@ -1,4 +1,11 @@
-# Cluster Kubernetes
+<h1 align="center">Esteira Devops - Kubernetes Kubespray  👋</h1>
+
+## Author
+👤 **Eder Queiroz**
+* Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+
+## 🤝 Contribuições são bem vindas
+Linux ❤️
 
 - [Cluster Kubernetes](#cluster-kubernetes)
       - [Pré-Requisitos:](#pré-requisitos)
