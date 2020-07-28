@@ -6,6 +6,7 @@
 
 ## 🤝 Contribuições são bem vindas
 Linux ❤️
+<hr>
 
 - [Cluster Kubernetes](#cluster-kubernetes)
       - [Pré-Requisitos:](#pré-requisitos)
