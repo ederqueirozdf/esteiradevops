@@ -25,12 +25,12 @@
   
 <hr>
 
-- [Gerenciando Kubernetes]
+- [Gerenciando Kubernetes](GerenciandoKubernetes)
   - [Octant + Jenkinsx](JenkinsX/Octante.md)
   
 <hr>
 
-Google Cloud Plataform + Terraform + KubeSpray + JenkinsX + Algum storage class (NFS ou GlusterFs)
+Google Cloud Plataform + [Terraform](https://www.terraform.io/) + [KubeSpray](http://kubespray.io/) + [JenkinsX](https://jenkins-x.io/) + Storage
 
 #### Pré-Requisitos:
 - Conta na Gcloud

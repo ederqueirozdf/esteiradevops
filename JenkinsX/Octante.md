@@ -8,7 +8,7 @@
 Linux ❤️
 <hr>
 
-Gerenciando o cluster kubernetes + Jenkinsx + Octant
+Gerenciando o cluster kubernetes através de uma interface web [(Octant)](https://github.com/vmware-tanzu/octant) com plugin [Jenkinsx.](https://github.com/jenkins-x/octant-jx)
 
 **Efetuando download:**
 
