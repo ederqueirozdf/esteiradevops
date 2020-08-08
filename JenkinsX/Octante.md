@@ -1,4 +1,12 @@
-# Octant + JenkinsX
+<h1 align="center">Octant + Jenkinsx  👋</h1>
+
+## Author
+👤 **Eder Queiroz**
+* Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+
+## 🤝 Contribuições são bem vindas
+Linux ❤️
+<hr>
 
 Gerenciando o cluster kubernetes + Jenkinsx + Octant
 
@@ -66,3 +74,4 @@ Você pode obter as configurações executando o comando:
 Copie e cole no campo de upload kubeconfig e clique em upload.
 
 ![Octant](img/octant.png)
+

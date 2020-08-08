@@ -22,6 +22,13 @@
   - [4. Storage](#4-storage)
   - [5. JenkinsX](#5-jenkinsx)
   - [6. Git](#6-git)
+  
+<hr>
+
+- [Gerenciando Kubernetes]
+  - [Octant + Jenkinsx](JenkinsX/Octante.md)
+  
+<hr>
 
 Google Cloud Plataform + Terraform + KubeSpray + JenkinsX + Algum storage class (NFS ou GlusterFs)
 

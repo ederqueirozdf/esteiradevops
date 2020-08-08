@@ -29,3 +29,6 @@ Linux ❤️
   - [4. Storage](Arquitetura-Kubespray-GCP.md#4-storage)
   - [5. JenkinsX](Arquitetura-Kubespray-GCP.md#5-jenkinsx)
   - [6. Git](Arquitetura-Kubespray-GCP.md#6-git)
+
+- [Gerenciando Kubernetes]
+  - [Octant + Jenkinsx](JenkinsX/Octante.md)
