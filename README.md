@@ -1,11 +1,11 @@
-<h1 align="center">Esteira Devops - Kubernetes Kubespray  👋</h1>
+<h1 align="center"> Esteira - Kubernetes | Kubespray 🐧 </h1>
 
-## Author
-👤 **Eder Queiroz**
-* Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+- Repositório de configuração de um cluster kubernetes utilizando soluções para automatização da construção da estrutura de infra com integração e entrega contínua (Em construção)
 
-## 🤝 Contribuições são bem vindas
-Linux ❤️
+#### 👤 Por: **Eder Queiroz**
+ - 🐱 Github: [@ederqueirozdf](https://github.com/ederqueirozdf)
+ - 🤙 Telegram: [@ederqueirozdf](https://t.me/ederqueirozdf)
+ - Linux ❤️
 <hr>
 
 - [Cluster Kubernetes](Arquitetura-Kubespray-GCP.md#cluster-kubernetes)
